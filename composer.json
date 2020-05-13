@@ -1,0 +1,5 @@
+{
+  "require": {
+    "sy-records/thrift2-hbase": "^1.0.0"
+  }
+}

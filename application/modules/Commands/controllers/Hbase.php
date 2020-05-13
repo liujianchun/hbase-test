@@ -1,9 +1,13 @@
 <?php
+use Luffy\AliHbaseThrift\Serivce\AliHbaseThriftService;
+use Luffy\Thrift2Hbase\TDelete;
+
 /**
  * HBase导入数据测试
  */
 
 class HBaseController extends TCControllerBase {
+
   public function importAction() {
     ini_set('memory_limit','1G');
     $file_path = APPLICATION_PATH . '/runtime/user_opened_gashapon.txt';
@@ -20,4 +24,60 @@ class HBaseController extends TCControllerBase {
       echo $user_id . ":" . $date . ":" . $coupons_count . ":" . $continuous_days . ":" . $extra_data . "\n";
     }
   }
+
+  public function delete(){}
+
+  public function put(){
+    $aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6004, 'root', 'root');
+    $client = $aliHbaseThriftService->getClient();
+    $table_name = "test";
+    $family = "f";
+    $row_key = "1,2020-05-13";
+
+    $putValueArr = [
+      "coupons_count" => "1",
+      "continuous_days" => "30",
+      "extra_data" => '{"reward_id":1}',
+    ];
+    $aliHbaseThriftService->putValue($table_name, $row_key, $family, $putValueArr);
+
+    $get_row = $aliHbaseThriftService->getRow($table_name, $row_key);
+    var_dump($get_row);
+
+    $puts_data = [
+      [
+        "row" => "2,2020-05-13",
+        "family" => $family,
+        "columns" => [
+          "coupons_count" => "2",
+          "continuous_days" => "50",
+          "extra_data" => '{"reward_id":2}',
+        ]
+      ],
+      [
+        "row" => "3,2020-05-13",
+        "family" => $family,
+        "columns" => [
+          "coupons_count" => "2",
+          "continuous_days" => "60",
+          "extra_data" => '{"reward_id":10}',
+        ]
+      ],
+    ];
+    $aliHbaseThriftService->putMultiple($table_name, $puts_data);
+
+    // 验证
+    $gets_data = [
+      [
+        "row" => "2,2020-05-13",
+      ],
+      [
+        "row" => "3,2020-05-13",
+      ],
+    ];
+    $gets = $aliHbaseThriftService->getMultiple($table_name, $gets_data);
+    var_dump($gets);
+  }
+
+  public function get(){}
 }

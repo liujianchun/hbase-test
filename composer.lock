@@ -1,0 +1,79 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d30c66c80c01be828e981c17f9cd0666",
+    "packages": [
+        {
+            "name": "sy-records/thrift2-hbase",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sy-records/thrift2-hbase.git",
+                "reference": "40b916115745dd796d56d0d05e0c33a0dc1f0a61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sy-records/thrift2-hbase/zipball/40b916115745dd796d56d0d05e0c33a0dc1f0a61",
+                "reference": "40b916115745dd796d56d0d05e0c33a0dc1f0a61",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "hyperf/contract": "The contracts of Hyperf.",
+                "hyperf/utils": "A tools package that could help developer solved the problem quickly.",
+                "psr/container": "Common Container Interface (PHP FIG PSR-11)"
+            },
+            "type": "library",
+            "extra": {
+                "hyperf": {
+                    "config": "Luffy\\AliHbaseThrift\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Luffy\\AliHbaseThrift\\": "src/",
+                    "Thrift\\": "src/Thrift/",
+                    "Luffy\\Thrift2Hbase\\": "src/Thrift2Hbase/",
+                    "Luffy\\AliHbaseThrift\\Serivce\\": "src/Service/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luffy",
+                    "email": "52o@qq52o.cn",
+                    "homepage": "https://qq52o.me"
+                }
+            ],
+            "description": "thrift for ali hbase+",
+            "keywords": [
+                "hbase",
+                "hyperf",
+                "php"
+            ],
+            "time": "2020-05-08T09:39:07+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
