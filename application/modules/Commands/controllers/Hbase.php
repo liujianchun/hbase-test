@@ -7,6 +7,15 @@ use Luffy\Thrift2Hbase\TDelete;
  */
 
 class HBaseController extends TCControllerBase {
+  /**
+   * @var AliHbaseThriftService
+   */
+  private $aliHbaseThriftService;
+
+  /**
+   * @var \Luffy\Thrift2Hbase\THBaseServiceClient
+   */
+  private $client;
 
   public function importAction() {
     ini_set('memory_limit','1G');
@@ -28,9 +37,8 @@ class HBaseController extends TCControllerBase {
   public function deleteAction(){}
 
   public function putAction(){
-    $aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6005, 'root', 'Sg123456');
-    //$client = $aliHbaseThriftService->getClient();
-    var_dump(1);
+    $this->aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6005, 'root', 'Sg123456');
+    $this->client = $this->aliHbaseThriftService->getClient();
     $table_name = "test";
     $family = "f";
     $row_key = "1,2020-05-13";
@@ -40,9 +48,8 @@ class HBaseController extends TCControllerBase {
       "continuous_days" => "30",
       "extra_data" => '{"reward_id":1}',
     ];
-    $aliHbaseThriftService->putValue($table_name, $row_key, $family, $putValueArr);
-    var_dump(2);
-    $get_row = $aliHbaseThriftService->getRow($table_name, $row_key);
+    $this->aliHbaseThriftService->putValue($table_name, $row_key, $family, $putValueArr);
+    $get_row = $this->aliHbaseThriftService->getRow($table_name, $row_key);
     var_dump($get_row);
 
     $puts_data = [
@@ -65,7 +72,7 @@ class HBaseController extends TCControllerBase {
         ]
       ],
     ];
-    $aliHbaseThriftService->putMultiple($table_name, $puts_data);
+    $this->aliHbaseThriftService->putMultiple($table_name, $puts_data);
 
     // 验证
     $gets_data = [
@@ -76,7 +83,7 @@ class HBaseController extends TCControllerBase {
         "row" => "3,2020-05-13",
       ],
     ];
-    $gets = $aliHbaseThriftService->getMultiple($table_name, $gets_data);
+    $gets = $this->aliHbaseThriftService->getMultiple($table_name, $gets_data);
     var_dump($gets);
   }
 
