@@ -5,7 +5,7 @@
 
 class HBaseController extends TCControllerBase {
   public function importAction() {
-    ini_set('memory_limit','2G');
+    ini_set('memory_limit','1G');
     $file_path = APPLICATION_PATH . '/runtime/user_opened_gashapon.txt';
     if(!file_exists($file_path)) return;
     foreach(explode("\n", file_get_contents($file_path)) as $line) {
