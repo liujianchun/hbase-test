@@ -39,14 +39,14 @@ class HBaseController extends TCControllerBase {
   public function putAction(){
     $this->aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6005, 'root', 'root');
     $this->client = $this->aliHbaseThriftService->getClient();
-    $table_name = "test";
-    $family = "f";
+    $table_name = "test2";
+    $family = "f1";
     $row_key = "1,2020-05-13";
 
     $putValueArr = [
-      "coupons_count" => "1",
-      "continuous_days" => "30",
-      "extra_data" => '{"reward_id":1}',
+      "f1:coupons_count" => "1",
+      "f1:continuous_days" => "30",
+      "f1:extra_data" => '{"reward_id":1}',
     ];
     $this->aliHbaseThriftService->putValue($table_name, $row_key, $family, $putValueArr);
     $get_row = $this->aliHbaseThriftService->getRow($table_name, $row_key);
@@ -57,18 +57,18 @@ class HBaseController extends TCControllerBase {
         "row" => "2,2020-05-13",
         "family" => $family,
         "columns" => [
-          "coupons_count" => "2",
-          "continuous_days" => "50",
-          "extra_data" => '{"reward_id":2}',
+          "f1:coupons_count" => "2",
+          "f1:continuous_days" => "50",
+          "f1:extra_data" => '{"reward_id":2}',
         ]
       ],
       [
         "row" => "3,2020-05-13",
         "family" => $family,
         "columns" => [
-          "coupons_count" => "2",
-          "continuous_days" => "60",
-          "extra_data" => '{"reward_id":10}',
+          "f1:coupons_count" => "2",
+          "f1:continuous_days" => "60",
+          "f1:extra_data" => '{"reward_id":10}',
         ]
       ],
     ];
