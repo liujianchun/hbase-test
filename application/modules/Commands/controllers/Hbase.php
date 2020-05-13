@@ -48,7 +48,6 @@ class HBaseController extends TCControllerBase {
       "continuous_days" => "30",
       "extra_data" => '{"reward_id":1}',
     ];
-    var_dump($this->aliHbaseThriftService->getClient());
     $this->aliHbaseThriftService->putValue($table_name, $row_key, $family, $putValueArr);
     $get_row = $this->aliHbaseThriftService->getRow($table_name, $row_key);
     var_dump($get_row);
