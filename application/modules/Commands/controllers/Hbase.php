@@ -31,7 +31,7 @@ class HBaseController extends TCControllerBase {
     $aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6005, 'root', 'Sg123456');
     //$client = $aliHbaseThriftService->getClient();
     var_dump(1);
-    $table_name = "test";
+    $table_name = "scanface:test";
     $family = "f";
     $row_key = "1,2020-05-13";
 
