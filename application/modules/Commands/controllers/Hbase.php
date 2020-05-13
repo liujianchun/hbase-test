@@ -25,9 +25,9 @@ class HBaseController extends TCControllerBase {
     }
   }
 
-  public function delete(){}
+  public function deleteAction(){}
 
-  public function put(){
+  public function putAction(){
     $aliHbaseThriftService = new AliHbaseThriftService('172.22.0.6', 6004, 'root', 'root');
     $client = $aliHbaseThriftService->getClient();
     $table_name = "test";
@@ -79,5 +79,5 @@ class HBaseController extends TCControllerBase {
     var_dump($gets);
   }
 
-  public function get(){}
+  public function getAction(){}
 }
